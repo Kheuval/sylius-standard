@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "7cb53bd60954d492afa7a6fa50f303e0",
+    "content-hash": "c26111e0f6f90df266cf2b4a64386269",
     "packages": [
         {
             "name": "alcohol/iso4217",
@@ -15138,16 +15138,16 @@
         },
         {
             "name": "phpstan/phpstan",
-            "version": "1.10.62",
+            "version": "1.11.4",
             "source": {
                 "type": "git",
                 "url": "https://github.com/phpstan/phpstan.git",
-                "reference": "cd5c8a1660ed3540b211407c77abf4af193a6af9"
+                "reference": "9100a76ce8015b9aa7125b9171ae3a76887b6c82"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/phpstan/phpstan/zipball/cd5c8a1660ed3540b211407c77abf4af193a6af9",
-                "reference": "cd5c8a1660ed3540b211407c77abf4af193a6af9",
+                "url": "https://api.github.com/repos/phpstan/phpstan/zipball/9100a76ce8015b9aa7125b9171ae3a76887b6c82",
+                "reference": "9100a76ce8015b9aa7125b9171ae3a76887b6c82",
                 "shasum": ""
             },
             "require": {
@@ -15190,13 +15190,9 @@
                 {
                     "url": "https://github.com/phpstan",
                     "type": "github"
-                },
-                {
-                    "url": "https://tidelift.com/funding/github/packagist/phpstan/phpstan",
-                    "type": "tidelift"
                 }
             ],
-            "time": "2024-03-13T12:27:20+00:00"
+            "time": "2024-06-06T12:19:22+00:00"
         },
         {
             "name": "phpstan/phpstan-doctrine",
@@ -15876,6 +15872,65 @@
                 "source": "https://github.com/php-fig/http-factory/tree/1.0.2"
             },
             "time": "2023-04-10T20:10:41+00:00"
+        },
+        {
+            "name": "rector/rector",
+            "version": "1.1.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/rectorphp/rector.git",
+                "reference": "556509e2dcf527369892b7d411379c4a02f31859"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/rectorphp/rector/zipball/556509e2dcf527369892b7d411379c4a02f31859",
+                "reference": "556509e2dcf527369892b7d411379c4a02f31859",
+                "shasum": ""
+            },
+            "require": {
+                "php": "^7.2|^8.0",
+                "phpstan/phpstan": "^1.11"
+            },
+            "conflict": {
+                "rector/rector-doctrine": "*",
+                "rector/rector-downgrade-php": "*",
+                "rector/rector-phpunit": "*",
+                "rector/rector-symfony": "*"
+            },
+            "suggest": {
+                "ext-dom": "To manipulate phpunit.xml via the custom-rule command"
+            },
+            "bin": [
+                "bin/rector"
+            ],
+            "type": "library",
+            "autoload": {
+                "files": [
+                    "bootstrap.php"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "description": "Instant Upgrade and Automated Refactoring of any PHP code",
+            "keywords": [
+                "automation",
+                "dev",
+                "migration",
+                "refactoring"
+            ],
+            "support": {
+                "issues": "https://github.com/rectorphp/rector/issues",
+                "source": "https://github.com/rectorphp/rector/tree/1.1.0"
+            },
+            "funding": [
+                {
+                    "url": "https://github.com/tomasvotruba",
+                    "type": "github"
+                }
+            ],
+            "time": "2024-05-18T09:40:27+00:00"
         },
         {
             "name": "sebastian/code-unit-reverse-lookup",
@@ -16858,20 +16913,21 @@
         },
         {
             "name": "sylius/sylius-rector",
-            "version": "v1.0",
+            "version": "v2.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Sylius/SyliusRector.git",
-                "reference": "d323546a847a04500225e7627dabe8163d3b1dc4"
+                "reference": "87c35b2ece88cce7b2c3e11ef6d3e9db60edace9"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Sylius/SyliusRector/zipball/d323546a847a04500225e7627dabe8163d3b1dc4",
-                "reference": "d323546a847a04500225e7627dabe8163d3b1dc4",
+                "url": "https://api.github.com/repos/Sylius/SyliusRector/zipball/87c35b2ece88cce7b2c3e11ef6d3e9db60edace9",
+                "reference": "87c35b2ece88cce7b2c3e11ef6d3e9db60edace9",
                 "shasum": ""
             },
             "require": {
-                "php": "^8.0"
+                "php": "^8.0",
+                "rector/rector": "^1.0"
             },
             "conflict": {
                 "rector/rector": "<0.11",
@@ -16883,8 +16939,6 @@
                 "phpstan/phpstan-strict-rules": "^1.2",
                 "phpstan/phpstan-webmozart-assert": "^1.1",
                 "phpunit/phpunit": "^9.5",
-                "rector/phpstan-rules": "^0.5",
-                "rector/rector": "dev-main",
                 "symplify/easy-coding-standard": "^10.0|^11.0",
                 "symplify/package-builder": "^10.0",
                 "symplify/phpstan-extensions": "^10.0|^11.0",
@@ -16896,7 +16950,7 @@
             "extra": {
                 "enable-patching": true,
                 "branch-alias": {
-                    "dev-main": "1.0-dev"
+                    "dev-main": "2.0-dev"
                 },
                 "rector": {
                     "includes": [
@@ -16916,9 +16970,9 @@
             "description": "Rector upgrades rules for Sylius",
             "support": {
                 "issues": "https://github.com/Sylius/SyliusRector/issues",
-                "source": "https://github.com/Sylius/SyliusRector/tree/v1.0"
+                "source": "https://github.com/Sylius/SyliusRector/tree/v2.0"
             },
-            "time": "2023-04-21T09:19:11+00:00"
+            "time": "2024-03-12T10:39:41+00:00"
         },
         {
             "name": "symfony/browser-kit",
