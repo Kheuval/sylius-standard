@@ -1,0 +1,86 @@
+version: '3.4'
+
+x-app-env-vars: &app-env-vars
+    APP_ENV: ${APP_ENV:-dev}
+    APP_DEBUG: ${APP_DEBUG:-1}
+    APP_SECRET: ${APP_SECRET:-HyPERSecRET}
+    DATABASE_URL: mysql://sylius:nopassword@mysql/sylius_%kernel.environment%
+    MAILER_DSN: smtp://mailhog:1025
+    PHP_EXTENSION_GD: 1
+    PHP_EXTENSION_INTL: 1
+    PHP_INI_MEMORY_LIMIT: 1G
+    PHP_INI_POST_MAX_SIZE: 6M
+    PHP_INI_UPLOAD_MAX_FILESIZE: 5M
+    PHP_INI_DATE__TIMEZONE: Europe/Paris
+    PHP_INI_SESSION__SAVE_PATH: /srv/sylius/var/sessions
+
+services:
+    app:
+        container_name: sylius_training_php_node
+        image: thecodingmachine/php:8.2-v4-fpm-node18
+        depends_on:
+            - mysql
+        environment:
+            <<: *app-env-vars
+            DOCKER_USER: ${DOCKER_USER:-1000}
+        working_dir: /srv/sylius
+        volumes:
+            - .:/srv/sylius:rw,cached
+
+#    worker:
+#        container_name: sylius_training_worker
+#        image: thecodingmachine/php:8.2-v4-fpm
+#        depends_on:
+#            - mysql
+#        environment:
+#            <<: *app-env-vars
+#            DOCKER_USER: ${DOCKER_USER:-1000}
+#        working_dir: /srv/sylius
+#        command: [ "php", "bin/console", "messenger:consume", "main", "catalog_promotion_removal", "--limit=5", "--memory-limit=256M", "--time-limit=600" ]
+#        restart: unless-stopped
+#        volumes:
+#            - .:/srv/sylius:rw,cached
+
+    mysql:
+        container_name: sylius_training_mysql
+        image: mysql:8.0
+        environment:
+            MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD:-nopassword}
+            MYSQL_DATABASE: sylius_dev
+            MYSQL_USER: sylius
+            MYSQL_PASSWORD: ${MYSQL_PASSWORD:-nopassword}
+        volumes:
+            - mysql_data:/var/lib/mysql:rw
+
+    caddy:
+        container_name: sylius_training_caddy
+        image: caddy:latest
+        depends_on:
+            - app
+        environment:
+            DOMAIN_NAME: sylius.wip
+        volumes:
+            - ./public:/srv/sylius/public:ro
+            - ./docker/caddy/Caddyfile:/etc/caddy/Caddyfile
+            - ./docker/caddy/sylius.wip.pem:/usr/local/etc/caddy/certs/sylius.wip.pem
+            - ./docker/caddy/sylius.wip-key.pem:/usr/local/etc/caddy/certs/sylius.wip-key.pem
+
+    mailhog:
+        container_name: sylius_training_mailhog
+        image: mailhog/mailhog:latest
+        environment:
+            MH_STORAGE: maildir
+            DOMAIN_NAME: mail.sylius.wip
+
+    phpmyadmin:
+        container_name: sylius_training_pma
+        image: phpmyadmin/phpmyadmin
+        environment:
+            DOMAIN_NAME: pma.sylius.wip
+            PMA_HOSTS: mysql
+            PMA_USER: root
+            PMA_PASSWORD: ${MYSQL_ROOT_PASSWORD:-nopassword}
+            PMA_ARBITRARY: 1
+
+volumes:
+    mysql_data:

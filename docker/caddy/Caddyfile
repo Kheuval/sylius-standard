@@ -1,0 +1,15 @@
+:443 {
+    tls /usr/local/etc/caddy/certs/sylius.wip.pem /usr/local/etc/caddy/certs/sylius.wip-key.pem
+
+    log {
+        level ERROR
+        format console
+    }
+
+    route {
+        root * /srv/sylius/public
+        php_fastcgi app:9000
+        encode gzip
+        file_server
+    }
+}

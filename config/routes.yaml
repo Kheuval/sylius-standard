@@ -1,0 +1,9 @@
+sylius_paypal_webhook:
+    resource: "@SyliusPayPalPlugin/Resources/config/webhook_routing.yaml"
+    
+app_ajax:
+    resource: "../src/Controller/**/*"
+    prefix: /ajax
+    type: attribute
+    name_prefix: app_ajax_
+
